@@ -1,0 +1,18 @@
+[package]
+name = "shellcode0"
+version = "0.1.0"
+edition = "2024"
+
+[profile.dev]
+panic = "abort"
+opt-level = "z"
+lto = true
+
+[profile.release]
+panic = "abort"
+opt-level = "z"
+lto = true
+
+[dependencies]
+num-traits = { version = "0.2.19", default-features = false }
+utf16_literal = "0.2.1"

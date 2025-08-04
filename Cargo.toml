@@ -1,0 +1,9 @@
+[package]
+name = "shellcode"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.98"
+goblin = "0.10.0"
+maidism = { git = "https://github.com/2vg/blackcat-rs", package = "maidism" }
