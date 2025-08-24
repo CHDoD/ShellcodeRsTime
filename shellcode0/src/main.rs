@@ -146,9 +146,10 @@ unsafe fn get_func_by_name(module: PVOID, func_name: *const u8) -> PVOID {
     return NULL;
 }
 
-
+/* 
 unsafe fn find_func<T>(module_name: &str, func_name: &str) -> T {
-    let module = get_module_by_name(to_utf16z(module_name).as_ptr());
+    use widestring::U16CString;
+    let module = get_module_by_name(U16CString::from_str(module_name).expect("无效的模块名，包含空字符").as_ptr());
     if module.is_null() {
         panic!("Module not found: {}", module_name);
     }
@@ -160,4 +161,5 @@ unsafe fn find_func<T>(module_name: &str, func_name: &str) -> T {
 
     transmute(addr)
 }
+*/
 

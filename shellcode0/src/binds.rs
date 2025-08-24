@@ -561,19 +561,27 @@ impl Clone for IMAGE_SECTION_HEADER_Misc {
 }
 impl IMAGE_SECTION_HEADER_Misc {
     pub unsafe fn PhysicalAddress(&self) -> &DWORD {
-        &*(self as *const _ as *const DWORD)
+        unsafe {
+            &*(self as *const _ as *const DWORD)
+        }
     }
 
     pub unsafe fn PhysicalAddress_mut(&mut self) -> &mut DWORD {
-        &mut *(self as *mut _ as *mut DWORD)
+        unsafe {
+            &mut *(self as *mut _ as *mut DWORD)
+        }
     }
 
     pub unsafe fn VirtualSize(&self) -> &DWORD {
-        &*(self as *const _ as *const DWORD)
+        unsafe {
+            &*(self as *const _ as *const DWORD)
+        }
     }
 
     pub unsafe fn VirtualSize_mut(&mut self) -> &mut DWORD {
-        &mut *(self as *mut _ as *mut DWORD)
+        unsafe {
+            &mut *(self as *mut _ as *mut DWORD)
+        }
     }
 }
 
@@ -623,35 +631,51 @@ impl Clone for IMAGE_THUNK_DATA64_u1 {
 }
 impl IMAGE_THUNK_DATA64_u1 {
     pub unsafe fn ForwarderString(&self) -> &ULONGLONG {
-        &*(self as *const _ as *const ULONGLONG)
+        unsafe {
+            &*(self as *const _ as *const ULONGLONG)
+        }
     }
 
     pub unsafe fn ForwarderString_mut(&mut self) -> &mut ULONGLONG {
-        &mut *(self as *mut _ as *mut ULONGLONG)
+        unsafe {
+            &mut *(self as *mut _ as *mut ULONGLONG)
+        }
     }
 
     pub unsafe fn Function(&self) -> &ULONGLONG {
-        &*(self as *const _ as *const ULONGLONG)
+        unsafe {
+            &*(self as *const _ as *const ULONGLONG)
+        }
     }
 
     pub unsafe fn Function_mut(&mut self) -> &mut ULONGLONG {
-        &mut *(self as *mut _ as *mut ULONGLONG)
+        unsafe{
+            &mut *(self as *mut _ as *mut ULONGLONG)
+        }
     }
 
     pub unsafe fn Ordinal(&self) -> &ULONGLONG {
-        &*(self as *const _ as *const ULONGLONG)
+        unsafe {
+            &*(self as *const _ as *const ULONGLONG)
+        }
     }
 
     pub unsafe fn Ordinal_mut(&mut self) -> &mut ULONGLONG {
-        &mut *(self as *mut _ as *mut ULONGLONG)
+        unsafe {
+            &mut *(self as *mut _ as *mut ULONGLONG)
+        }
     }
 
     pub unsafe fn AddressOfData(&self) -> &ULONGLONG {
-        &*(self as *const _ as *const ULONGLONG)
+        unsafe {
+            &*(self as *const _ as *const ULONGLONG)
+        }
     }
 
     pub unsafe fn AddressOfData_mut(&mut self) -> &mut ULONGLONG {
-        &mut *(self as *mut _ as *mut ULONGLONG)
+        unsafe {
+            &mut *(self as *mut _ as *mut ULONGLONG)
+        }
     }
 }
 

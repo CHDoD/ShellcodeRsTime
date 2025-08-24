@@ -10,7 +10,7 @@ fn main() -> Result<()> {
     let src_path = "shellcode0/target/release/shellcode0.exe";
     let mut buffer = get_binary_from_file(src_path)?;
 
-    let pe = PE::parse(&buffer)
+    let pe = PE::parse(&mut buffer)
         .with_context(|| format!("could not parse the PE file: {}", src_path))?;
 
     let standard_fileds = pe.header.optional_header.unwrap().standard_fields;
@@ -79,7 +79,7 @@ fn main() -> Result<()> {
         buf_writer.flush()
             .with_context(|| format!("could not flush the file: {}", dst_path))?;
 
-        println!("--------- .text section ---------");
+        println!("--------- .text section start---------");
         let binary = &buffer[start..(start + size)];
         maidism::disassemble(binary, 0x0, 0x0, 6, BITNESS, true)?;
 

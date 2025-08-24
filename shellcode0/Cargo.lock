@@ -23,6 +23,7 @@ version = "0.1.0"
 dependencies = [
  "num-traits",
  "utf16_literal",
+ "widestring",
 ]
 
 [[package]]
@@ -30,3 +31,9 @@ name = "utf16_literal"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "316f90fe4a7beb941ce0b6806ba7386f1a515155a42def71825f3f9a232e3f48"
+
+[[package]]
+name = "widestring"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "17882f045410753661207383517a6f62ec3dbeb6a4ed2acce01f0728238d1983"

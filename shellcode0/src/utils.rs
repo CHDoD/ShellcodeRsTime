@@ -4,9 +4,12 @@
 /// 获取宽字符指针（Windows 内核常用宽字符表示路径 / 模块名）的长度。
 ///
 ///
-unsafe fn u16_ptr_len(ptr: *const u16) -> usize {
-    let len = (0..).take_while(|&i| !(*ptr.offset(i)).is_null()).count();
-    len
+fn u16_ptr_len(ptr: *const u16) -> usize {
+    unsafe{
+        let len = (0..).take_while(|&i| *ptr.offset(i) != 0).count();
+        len 
+    }
+    
 }
 
 ///
@@ -77,9 +80,9 @@ where
             return false;
         }
 
-        let u_len = (0..).take_while(|&i| !(*u.offset(i)).is_zero).count();
+        let u_len = (0..).take_while(|&i| !(*u.offset(i)).is_zero()).count();
         let u_slice = core::slice::from_raw_parts(u, u_len);
-        let s_len = (0..).take_while(|&i| !(*s.offset(i)).is_zero).count();
+        let s_len = (0..).take_while(|&i| !(*s.offset(i)).is_zero()).count();
         let s_slice = core::slice::from_raw_parts(s, s_len);
         if u_len != s_len {
             return false;
@@ -94,19 +97,12 @@ where
     true
 }
 
-pub fn to_ascii_z(s: &str) -> &[u8] {
-    // 返回 null 结尾的 ASCII 字符串
-    use core::slice;
-
-    let len = s.len();
-    let ptr = s.as_ptr();
-
-    unsafe {
-        // 静态分配一块内存空间（简化实现，你也可以用栈或全局内存）
-        // 实际项目里建议用更安全的做法，比如栈上写个临时 buf
-        let mut buf = [0u8; 256];
-        core::ptr::copy_nonoverlapping(ptr, buf.as_mut_ptr(), len);
-        buf[len] = 0;
-        &buf[..=len] // 包含末尾 \0
-    }
+pub fn to_ascii_z(s: &str) -> [u8; 64] {
+    // 返回 null 结尾的 ASCII 字符串数组
+    let mut buf = [0u8; 64];
+    let bytes = s.as_bytes();
+    let len = core::cmp::min(bytes.len(), 63);
+    buf[..len].copy_from_slice(&bytes[..len]);
+    buf[len] = 0;
+    buf
 }
